@@ -5,7 +5,7 @@ import { initializeMotion } from './motion.js';
 import './styles/scroll.css';
 import './styles/festival.css';
 import { families } from './data/families.js';
-import { androidCalendarIntent, googleCalendarUrl } from './calendar.js';
+import { googleCalendarUrl } from './calendar.js';
 import { languages, messages } from './data/locales.js';
 
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -117,8 +117,6 @@ function eventCard(id, index, print = false) {
       <span>${escape(place)}</span>
       ${mapLink}
       <span class="pending-pill">${escape(tr('time'))} · ${escape(tr('eventTime'))}</span>
-      <a class="calendar-file" href="${escape(androidCalendarIntent(event, name, `${description}\n\n${tr('calendarTimeNote')}\n${event.mapUrl}`, place, `${location.origin}/calendar/${id}.ics`))}">${escape(tr('androidCalendar'))}</a>
-      <small class="calendar-time-note">${escape(tr('androidCalendarHelp'))}</small>
       <a class="calendar-button" href="${escape(googleCalendarUrl(event, tr(event.key), `${description}\n\n${tr('calendarTimeNote')}`, place))}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span> ${escape(tr('googleCalendar'))}<span aria-hidden="true">↗</span></a>
       <small class="calendar-time-note">${escape(tr('calendarTimeNote'))}</small>
       <a class="calendar-file" href="webcal://${escapeAttribute(location.host)}/calendar/${id}.ics">${escape(tr('appleCalendarSubscribe'))}</a>
