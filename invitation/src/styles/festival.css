@@ -1,0 +1,164 @@
+/* Jewel garden: plum silk, marigold and rose with deep peacock ink. */
+:root {
+  --green: #173c38;
+  --green-2: #21635a;
+  --gold: #9a5b18;
+  --ivory: #fff3e8;
+  --paper: #fffaf5;
+  --rose: #ad3f61;
+  --muted: #594c49;
+  --line: #d9bca9;
+}
+body {
+  background:
+    radial-gradient(ellipse at 4% 14%, #f8c4ad75, transparent 28rem),
+    radial-gradient(ellipse at 95% 30%, #f8d59a85, transparent 34rem),
+    radial-gradient(ellipse at 10% 71%, #e5adbe55, transparent 33rem),
+    linear-gradient(155deg, #fff7ec 0%, #ffeddf 47%, #fff5e9 100%);
+}
+body::before { background:
+  radial-gradient(ellipse at 14% 48%, #f5ba6a33, transparent 27%),
+  radial-gradient(ellipse at 82% 22%, #c93b7230, transparent 27%),
+  radial-gradient(ellipse at 76% 79%, #286e6022, transparent 29%);
+}
+.topbar { background: rgba(255,248,240,.94); border-color: #dcbbab; }
+.monogram { border-color: #b9782a; background: #fff4df; box-shadow: 0 0 0 4px #dca96022; }
+.quick-nav .nav-rsvp { background: #8c2f53; color: #fff; }
+.quick-nav .nav-rsvp:hover, .quick-nav .nav-rsvp:focus-visible { background: #6e1e40; }
+.landing-portrait {
+  border: 1px solid #dcad56;
+  background: radial-gradient(ellipse at 48% 22%, #a74a63 0%, #6b274a 45%, #35192f 100%);
+  box-shadow: 0 32px 70px #702f443d, 0 0 0 8px #ddab4930, 0 0 0 15px #e5b66716;
+}
+.landing-portrait::after { background: linear-gradient(115deg, transparent 42%, #ffdda40e 48%, #fff0c93d 50%, #f4d68f12 52%, transparent 58%); }
+.landing-portrait::before { opacity: .95; }
+.landing-seal { background: #772e4c; border-color: #f0cf88; box-shadow: 0 0 0 4px #f2ca7750; }
+.landing-kicker, .landing-city { color: #ffe0a2; }
+.landing-couple strong { color: #fff5e6; }
+.landing-couple strong em { color: #ffdb8d; }
+.landing-date { color: #fff5df; border-color: #f7d49277; }
+.landing-choices .screen-copy h1 { color: #223e38; }
+.screen-copy h1 em {
+  background-image: linear-gradient(105deg, #ac3b5e, #d86a4e 38%, #b57824 70%, #ac3b5e);
+}
+.screen-copy .kicker, .kicker { color: #a0521b; }
+.language-card {
+  background: #fffaf4;
+  border-color: #dfb7a1;
+  box-shadow: 0 8px 24px #a7464520;
+}
+.language-card[aria-pressed="true"] { background: #fff0df; border-color: #ae6046; box-shadow: inset 0 0 0 1px #c88265, 0 8px 24px #a746451b; }
+.primary-button { color: #fff; background: linear-gradient(110deg,#852c52,#ae3d61); border-color: #8c2d50; box-shadow: 0 10px 23px #a73f6233; }
+.primary-button:hover, .primary-button:focus-visible { background: linear-gradient(110deg,#672040,#963153); color: #fff; box-shadow: 0 15px 30px #a73f6240; }
+.hero-continue { border-radius: 8px; }
+.story-divider { color: #ae4b59; }
+.story-divider span { background: linear-gradient(90deg, transparent, #c68a6a); }
+.family-section .family-group { border-color: #d0a789; }
+.family-section .family-group::before { background: #fff0e6; color: #b04767; }
+.family-section .family-heading { color: #8e3b50; }
+.event-index { border-color: #c99375; background: #fff8f0a8; }
+.event-index a + a { border-color: #e1bba9; }
+.event-index a > span { color: #973754; }
+.event-index a:hover { background: #f9e2d9; }
+.event-timeline::before { background: linear-gradient(#d58b39, #b53e66 48%, #2e7969); opacity: .7; }
+.event-card { border-radius: 12px; box-shadow: 0 12px 36px #7a384318; }
+.event-card.marigold { --accent: #b96f14; background: linear-gradient(115deg,#fff6df,#ffedd0); border-color: #e1b774; }
+.event-card.ceremony { --accent: #207363; background: linear-gradient(115deg,#effaf4,#e4f3ed); border-color: #99c6b5; }
+.event-card.feast { --accent: #b13f67; background: linear-gradient(115deg,#fff1f1,#fbe2e6); border-color: #dfaabd; }
+.event-day { border-color: color-mix(in srgb, var(--accent) 28%, transparent); color: var(--accent); }
+.event-day small { color: var(--accent); }
+.event-number { color: var(--accent); }
+.keepsake-details { border-radius: 12px; border-color: #d8a78d; background: #fff8f1d9; box-shadow: 0 12px 34px #a34b5715; }
+.keepsake-details summary span:last-child { color: #a83c61; }
+.rsvp-panel { border-radius: 16px; border-color: #dba998; background: #fffaf4; box-shadow: 0 22px 52px #9f4a561e; }
+.rsvp-panel .seal { background: #f8d7bc; border-color: #d89562; color: #96375a; }
+.rsvp-attendance label:has(input:checked) { border-color: #aa4262; background: #fff0f1; }
+@media (prefers-reduced-motion: reduce) {
+  .landing-portrait::after { animation: none !important; }
+}
+@media print {
+  body { background: white !important; }
+}
+
+/* A common jewel and foil finish ties the digital invitation to its card. */
+.family-section .family-group {
+  background: linear-gradient(180deg, #fffaf47d, #fff8ef12);
+  border-radius: 0 0 55px 55px;
+}
+.event-index a { transition: background .25s ease, transform .25s ease; }
+.event-index a:focus-visible { outline: 3px solid #80324f; outline-offset: -3px; }
+.event-card { position: relative; }
+.event-card::after {
+  content: '✦'; position: absolute; right: 16px; top: 12px;
+  color: color-mix(in srgb, var(--accent) 50%, transparent); font-size: 13px;
+  pointer-events: none; animation: jewel-glint 4s ease-in-out infinite alternate;
+}
+.event-card:nth-child(2)::after { animation-delay: -1.3s; }
+.event-card:nth-child(3)::after { animation-delay: -2.6s; }
+@keyframes jewel-glint { from { opacity: .35; transform: scale(.8) rotate(-12deg); } to { opacity: .9; transform: scale(1.18) rotate(12deg); } }
+.rsvp-panel { position: relative; overflow: hidden; }
+.rsvp-panel::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 220px; height: 220px; border: 1px solid #cb8d9c42; border-radius: 50%;
+  box-shadow: 0 0 0 18px #e4b3a61b, 0 0 0 36px #e4b3a611; pointer-events: none;
+}
+.rsvp-panel > * { position: relative; }
+.invitation-closing { text-align: center; padding: 72px 20px 8px; color: #653247; }
+.closing-monogram { display: block; font: 500 32px/1 var(--serif); letter-spacing: -.04em; }
+.closing-monogram i { color: #b97934; font-size: .7em; }
+.invitation-closing p { margin: 14px auto; font: 400 14px/1.6 var(--sans); color: #5c4e4e; }
+.closing-flourish { color: #b37658; font-size: 12px; }
+.print-card .card-border { border-color: #af7953; }
+.print-card .card-kicker, .print-card .family-heading, .print-card .card-flourish { color: #8c3652; }
+.print-card .card-names strong, .print-card .card-event span { color: #253c39; }
+.print-card .card-loved-ones { background: #f8eae5; }
+@media (max-width: 760px) {
+  .invitation-closing { padding-top: 56px; }
+  .event-card::after { right: 12px; top: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-card::after { animation: none; }
+  .event-index a { transition: none; }
+}
+@media print {
+  .print-card .card-loved-ones { background: #f8eae5 !important; }
+}
+
+/* Native scrolling remains in control; motion decorates the journey. */
+.event-card { opacity: 1; transform: none; }
+.event-card.reveal-pending:not(.is-visible) { opacity: .92; transform: translateY(12px); }
+.event-card.reveal-pending:focus-within { opacity: 1; transform: none; }
+.scroll-reveal { opacity: .92; transform: translateY(12px); transition: opacity .65s ease, transform .75s cubic-bezier(.2,.65,.25,1); }
+.scroll-reveal.scroll-visible, .scroll-reveal:focus-within { opacity: 1; transform: none; }
+@supports (animation-timeline: view()) {
+  .story-divider {
+    animation: thread-unfold linear both;
+    animation-timeline: view();
+    animation-range: entry 5% entry 85%;
+  }
+  .event-day span {
+    animation: date-arrive linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 85%;
+  }
+  @keyframes thread-unfold { from { transform: scaleX(.76); opacity: .35; } to { transform: scaleX(1); opacity: 1; } }
+  @keyframes date-arrive { from { transform: translateY(10px); opacity: .65; } to { transform: translateY(0); opacity: 1; } }
+}
+@supports (animation-timeline: scroll()) {
+  .topbar::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
+    background: linear-gradient(90deg,#a63861,#df9d41,#297568);
+    transform-origin: left center; transform: scaleX(0); pointer-events: none;
+    animation: invitation-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes invitation-progress { to { transform: scaleX(1); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .event-card.reveal-pending:not(.is-visible), .scroll-reveal { opacity: 1; transform: none; transition: none; }
+  .story-divider, .event-day span, .topbar::after { animation: none !important; }
+}
+@media print {
+  .event-card, .scroll-reveal { opacity: 1 !important; transform: none !important; }
+  .story-divider, .event-day span, .topbar::after { animation: none !important; }
+}

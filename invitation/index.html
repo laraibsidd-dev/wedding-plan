@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#183e35">
+  <meta name="description" content="A personal invitation to celebrate with Laraib Siddiqui and Musharraf Jahan in Delhi, 26–28 December 2026.">
+  <meta name="robots" content="noindex,nofollow">
+<title>Laraib Siddiqui & Musharraf Jahan — A Wedding Invitation</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-copy="skipToInvitation">Skip to invitation</a>
+  <div class="paper-grain" aria-hidden="true"></div>
+  <div class="celebration-sky" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <header class="topbar">
+    <button class="wordmark" id="home-button" type="button" aria-label="Start over">
+      <span class="monogram"><b>L</b><i>&</i><b>M</b></span>
+      <span class="wordmark-copy"><b>Laraib Siddiqui & Musharraf Jahan</b><small data-copy="headerDate">26 — 28 DECEMBER 2026</small></span>
+    </button>
+    <div class="topbar-actions">
+      <nav class="quick-nav" data-copy-aria="quickNavigation" aria-label="Invitation shortcuts">
+        <a href="#screen-events" data-copy="navEvents">Events</a>
+        <a class="nav-rsvp" href="#rsvp-heading" data-copy="navRsvp">RSVP</a>
+      </nav>
+      <button class="quiet-button" id="language-button" type="button" aria-haspopup="dialog">
+        <span aria-hidden="true">文</span><span id="language-label">English</span>
+      </button>
+    </div>
+  </header>
+
+
+  <main id="main" tabindex="-1">
+    <section class="screen language-screen active" id="screen-language" data-step="language" aria-labelledby="language-title">
+      <div class="bismillah landing-bismillah"><span lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span><small data-copy="bismillahMeaning">In the name of Allah, the Most Compassionate, the Most Merciful</small></div>
+      <div class="landing-layout">
+        <div class="landing-portrait">
+          <svg class="landing-trace" viewBox="0 0 440 640" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M24 612V218C24 110 113 24 220 24s196 86 196 194v418"/></svg>
+          <div class="landing-stars" aria-hidden="true"><i>✧</i><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div>
+          <div class="cover-orbit cover-orbit-one" aria-hidden="true"></div>
+          <div class="cover-orbit cover-orbit-two" aria-hidden="true"></div>
+          <span class="landing-kicker" data-copy="ourWedding">OUR WEDDING</span>
+          <div class="landing-couple" dir="ltr"><strong>Laraib <em>Siddiqui</em></strong><span aria-hidden="true">&</span><strong>Musharraf <em>Jahan</em></strong></div>
+          <div class="landing-date"><span aria-hidden="true">✦</span><span data-copy="weddingDates">26–28 December 2026</span><span aria-hidden="true">✦</span></div>
+          <span class="landing-city" data-copy="delhi">DELHI NCR</span>
+          <div class="landing-seal" aria-hidden="true"><span>L<i>&</i>M</span></div>
+        </div>
+        <div class="landing-choices">
+          <div class="screen-copy centered">
+            <span class="kicker" data-copy="youAreInvited">YOU ARE INVITED</span>
+            <h1 id="language-title" tabindex="-1" data-copy-html="openingTitle">You’re<br> <em>invited.</em></h1>
+            <p data-copy="languageIntro">Choose your preferred language.</p>
+          </div>
+          <div class="language-grid" id="language-grid" role="group" aria-label="Choose your language"></div>
+          <a class="primary-button hero-continue section-link" href="#screen-welcome"><span data-copy="exploreInvitation">Explore the invitation</span><span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen family-section" id="screen-welcome" aria-labelledby="welcome-title">
+      <div class="story-divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+      <div class="family-intro">
+        <span class="kicker" data-copy="withJoy">TOGETHER WITH OUR FAMILIES</span>
+        <h2 id="welcome-title" data-copy="familyTitle">A celebration of two families</h2>
+        <p data-copy="familyIntro">Together with our families, we invite you to celebrate with us.</p>
+      </div>
+      <div class="family-lines" data-families></div>
+    </section>
+
+    <section class="screen invitation-screen" id="screen-events" data-step="events" aria-labelledby="events-title">
+      <div class="screen-copy centered invitation-heading">
+        <span class="kicker" data-copy="youAreInvited">YOU ARE INVITED</span>
+        <h1 id="events-title" tabindex="-1" data-copy-html="celebrateWithUs">Our wedding<br><em>celebrations.</em></h1>
+        <p data-copy="eventsIntro">Dates, times, and venues for each event.</p>
+      </div>
+      <div class="event-index" id="event-index" aria-label="Event dates"></div>
+      <div class="event-timeline" id="event-list"></div>
+    </section>
+
+    <section class="screen keepsake-screen" id="screen-keepsake" data-step="keepsake" aria-labelledby="keepsake-title">
+      <div class="story-divider keepsake-divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+      <div class="keepsake-intro">
+        <span class="kicker" data-copy="madeForYou">MADE FOR YOU</span>
+        <h2 id="keepsake-title" data-copy="keepsakeTitle">Keep a little piece of the day</h2>
+        <p data-copy="saveHelp">Save the invitation as a PDF or share the link.</p>
+      </div>
+      <details class="keepsake-details">
+        <summary><span data-copy="viewKeepsake">See your invitation</span><span aria-hidden="true">＋</span></summary>
+      <div class="personalize-card no-print">
+        <label for="guest-name" data-copy="guestName">Guest or family name</label>
+        <p data-copy="personalizeHelp">Add a name to your card, if you like.</p>
+        <div class="input-wrap"><input id="guest-name" name="guestName" type="text" maxlength="80" autocomplete="name" data-placeholder="namePlaceholder"><span aria-hidden="true">✦</span></div>
+      </div>
+
+      <article class="print-card" id="print-card" aria-label="Personalized wedding invitation preview">
+        <div class="card-border"><div class="card-inner">
+          <div class="bismillah"><span lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span><small data-copy="bismillahMeaning">In the name of Allah, the Most Compassionate, the Most Merciful</small></div>
+          <span class="card-kicker" data-copy="weddingInvitation">WEDDING INVITATION</span>
+          <div class="card-flourish" aria-hidden="true">✦</div>
+          <p class="card-to"><span data-copy="withWarmthFor">With love,</span><br><strong id="card-guest">Our dear guest</strong></p>
+          <div class="card-names" dir="ltr"><strong>Laraib Siddiqui</strong><i>&</i><strong>Musharraf Jahan</strong></div>
+          <div class="card-families" data-families></div>
+          <p class="card-message" data-copy="cardMessage">Together with our families, we warmly invite you to our wedding celebrations.</p>
+          <div class="card-events" id="card-events"></div>
+          <div class="card-loved-ones">
+            <p class="card-brother"><span data-copy="brotherLabel">Groom’s brother</span><strong>Shaqib</strong></p>
+            <p class="card-cousins"><span data-copy="cousinsLabel">With love from our cousins</span><strong>Shifa · Shayan · Rayan · Ali · Zohan · Izhaan · Ayaan · Amaan · Iqra · Ahad · Zaina · Liba · Aliza · Ayra</strong></p>
+          </div>
+          <div class="card-city" data-copy="cityLine">DELHI NCR · INDIA</div>
+          <p class="card-note" data-copy="detailsSoon">We look forward to welcoming you.</p>
+        </div></div>
+      </article>
+
+      <div class="keepsake-actions no-print">
+        <button class="primary-button" id="save-pdf" type="button"><span aria-hidden="true">↓</span><span data-copy="savePdf">Save as PDF</span></button>
+        <button class="secondary-button" id="share-invitation" type="button"><span aria-hidden="true">↗</span><span data-copy="shareInvitation">Share invitation</span></button>
+      </div>
+      </details>
+      <section class="rsvp-panel no-print" aria-labelledby="rsvp-heading">
+        <div class="rsvp-heading">
+          <span class="seal" aria-hidden="true">✓</span>
+          <div><span class="kicker" data-copy="rsvpEyebrow">KINDLY REPLY</span><h2 id="rsvp-heading" data-copy="rsvpHeading">Will you join us?</h2><p data-copy="rsvpIntro">Please confirm whether you’ll attend.</p></div>
+        </div>
+        <form id="rsvp-form" class="rsvp-form" novalidate>
+          <div id="rsvp-name-slot" class="rsvp-name-slot"></div>
+          <fieldset class="rsvp-attendance">
+            <legend data-copy="rsvpAttendance">Can you join us?</legend>
+            <label><input type="radio" name="attending" value="yes" required><span data-copy="rsvpYes">Yes, we’ll be there</span></label>
+            <label><input type="radio" name="attending" value="no"><span data-copy="rsvpNo">Sorry, we can’t make it</span></label>
+          </fieldset>
+          <div id="rsvp-party-wrap" class="rsvp-party" hidden>
+            <label class="rsvp-plus-one"><input id="rsvp-plus-one" name="plusOne" type="checkbox"><span data-copy="rsvpPlusOne">I’m bringing one guest (+1)</span></label>
+            <label for="rsvp-arrival-date" data-copy="rsvpArrivalDate">Which date will you arrive? (if travelling)</label>
+            <select id="rsvp-arrival-date" name="arrivalDate">
+              <option value="" data-copy="arrivalDatePrompt">Choose a date (optional)</option>
+              <option value="2026-12-26" data-copy="cardDateHaldi">26 December 2026</option>
+              <option value="2026-12-27" data-copy="cardDateNikah">27 December 2026</option>
+              <option value="2026-12-28" data-copy="cardDateWalima">28 December 2026</option>
+            </select>
+          </div>
+          <label class="rsvp-honeypot" aria-hidden="true"><span data-copy="honeypotLabel">Leave this field empty</span><input name="website" tabindex="-1" autocomplete="off"></label>
+          <p class="rsvp-privacy" data-copy="rsvpPrivacy">Your name and reply are sent to the hosts to help plan the wedding.</p>
+          <p id="rsvp-status" class="rsvp-status" role="status" aria-live="polite"></p>
+          <button class="primary-button" type="submit"><span data-copy="rsvpSubmit">Send RSVP</span><span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+      <footer class="invitation-closing no-print">
+        <span class="closing-monogram" aria-hidden="true">L <i>&</i> M</span>
+        <p data-copy="detailsSoon">We can’t wait to celebrate with you.</p>
+        <span class="closing-flourish" aria-hidden="true">✧ &nbsp; ✦ &nbsp; ✧</span>
+      </footer>
+    </section>
+
+  </main>
+
+  <dialog id="language-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head"><div><span class="kicker" data-copy="languageLabel">LANGUAGE</span><h2 id="dialog-title" data-copy="chooseLanguage">Choose your language</h2></div><button id="close-language" type="button" aria-label="Close">×</button></div>
+    <div class="dialog-languages" id="dialog-languages"></div>
+  </dialog>
+  <dialog id="invalid-dialog" aria-labelledby="invalid-title">
+    <div class="dialog-head"><div><span class="kicker" data-copy="invitationLink">INVITATION LINK</span><h2 id="invalid-title" data-copy="invalidTitle">Choose the events for your invitation</h2></div></div>
+    <p data-copy="invalidHelp">This link does not name a celebration. Choose the events you were invited to.</p>
+    <div class="link-fix-actions" id="link-fix-actions"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><section class="noscript"><h1>Laraib Siddiqui & Musharraf Jahan</h1><p>Warmly invite you to Haldi and Mehendi on 26 December 2026, Nikah on 27 December 2026, and Walima on 28 December 2026. Each event starts at 7 pm. Venues are in Delhi NCR.</p></section></noscript>
+</body>
+</html>

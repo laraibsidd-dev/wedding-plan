@@ -1,0 +1,6 @@
+node_modules/
+dist/
+tmp/
+public/saffron_and_silk.mp3
+.env*
+.vercel/

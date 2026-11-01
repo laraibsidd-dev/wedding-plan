@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" fill="none">
+ <g stroke="#e9cd8b" stroke-width="1.15" opacity=".9">
+  <circle cx="140" cy="140" r="126"/><circle cx="140" cy="140" r="112"/><circle cx="140" cy="140" r="94"/><circle cx="140" cy="140" r="73"/>
+  <g transform="rotate(0.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(22.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(45.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(67.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(90.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(112.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(135.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(157.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(180.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(202.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(225.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(247.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(270.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(292.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(315.0 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+<g transform="rotate(337.5 140 140)"><path d="M140 29 C122 55 122 78 140 91 C158 78 158 55 140 29Z"/><path d="M140 40V87"/></g>
+  <circle cx="140" cy="140" r="41"/><circle cx="140" cy="140" r="29"/><path d="M140 99 150 130 181 140 150 150 140 181 130 150 99 140 130 130Z"/>
+ </g>
+ <g fill="#f1d493"><circle cx="140" cy="140" r="4"/><circle cx="140" cy="12" r="2"/><circle cx="140" cy="268" r="2"/><circle cx="12" cy="140" r="2"/><circle cx="268" cy="140" r="2"/></g>
+</svg>
