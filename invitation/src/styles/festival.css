@@ -269,6 +269,9 @@ body::before { background:
   @page { size: A5 portrait; margin: 0; }
   body > :not(#pdf-invitation) { display: none !important; }
   #pdf-invitation { display: block !important; color: #173f37; font-family: var(--sans); }
+}
+#pdf-invitation.pdf-rendering { display: block; position: fixed; left: -10000px; top: 0; width: 148mm; z-index: -1; color: #173f37; font-family: var(--sans); }
+.calendar-time-note { display: block; color: #625650; font-size: 11px; line-height: 1.5; }
   .pdf-sheet {
     box-sizing: border-box; width: 148mm; min-height: 210mm; padding: 8mm;
     background: #fffaf1; break-after: page; page-break-after: always;
@@ -279,6 +282,7 @@ body::before { background:
     border: 1px solid #b17a49; padding: 9mm 8mm; min-height: 194mm;
     display: flex; flex-direction: column; align-items: center; gap: 4mm; text-align: center;
   }
+  .pdf-sheet:first-child .pdf-sheet-inner { justify-content: space-evenly; }
   .pdf-sheet .bismillah { display: grid; gap: 1mm; margin: 0; }
   .pdf-sheet .bismillah > span { font-size: 23pt; line-height: 1.5; }
   .pdf-sheet .bismillah > small { font-size: 8pt; line-height: 1.5; }
@@ -306,4 +310,3 @@ body::before { background:
   .pdf-sheet .card-brother strong { font: 600 15pt/1.2 var(--serif); }
   .pdf-sheet .card-cousins strong { font: 500 8.5pt/1.5 var(--sans); }
   .pdf-sheet .card-city, .pdf-sheet .card-note { margin: 0; padding: 0; font-size: 8pt; }
-}

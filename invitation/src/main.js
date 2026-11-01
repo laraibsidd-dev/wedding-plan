@@ -117,8 +117,9 @@ function eventCard(id, index, print = false) {
       <span>${escape(place)}</span>
       ${mapLink}
       <span class="pending-pill">${escape(tr('time'))} · ${escape(tr('eventTime'))}</span>
-      <a class="calendar-button" href="${escape(googleCalendarUrl(event, tr(event.key), description, place))}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span> ${escape(tr('googleCalendar'))}<span aria-hidden="true">↗</span></a>
-      <button class="calendar-file" type="button" data-calendar="${id}">${escape(tr('calendarFile'))}</button>
+      <a class="calendar-button" href="${escape(googleCalendarUrl(event, tr(event.key), `${description}\n\n${tr('calendarTimeNote')}`, place))}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span> ${escape(tr('googleCalendar'))}<span aria-hidden="true">↗</span></a>
+      <small class="calendar-time-note">${escape(tr('calendarTimeNote'))}</small>
+      <a class="calendar-file" href="/calendar/${id}.ics">${escape(tr('calendarFile'))}</a>
     </div>
   </article>`;
 }
@@ -172,33 +173,6 @@ function toast(message) {
   $('#toast').classList.add('show');
   clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => $('#toast').classList.remove('show'), 2600);
-}
-
-function escapeICS(value) {
-  return value.replaceAll('\\', '\\\\').replaceAll('\n', '\\n').replaceAll(',', '\\,').replaceAll(';', '\\;');
-}
-
-function addCalendar(id) {
-  const event = events[id];
-  const date = event.day.replaceAll('-', '');
-  const endDate = new Date(`${event.day}T00:00:00Z`);
-  endDate.setUTCDate(endDate.getUTCDate() + 1);
-  const exclusiveEndDate = endDate.toISOString().slice(0, 10).replaceAll('-', '');
-  const uid = `${id}-2026-laraib-musharraf@invitation`;
-  const description = [tr(`${event.key}Line`), event.mapUrl].filter(Boolean).join('\n');
-  const startLine = event.time
-    ? `DTSTART;TZID=Asia/Kolkata:${date}T${event.time.replace(':', '')}00`
-    : `DTSTART;VALUE=DATE:${date}`;
-  const endLine = event.time ? null : `DTEND;VALUE=DATE:${exclusiveEndDate}`;
-  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Laraib Siddiqui and Musharraf Jahan//Wedding Invitation//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',`UID:${uid}`,`DTSTAMP:${new Date().toISOString().replaceAll(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z')}`,startLine,...(endLine ? [endLine] : []),`SUMMARY:${escapeICS(tr(event.key))}`,`DESCRIPTION:${escapeICS(description)}`,`LOCATION:${escapeICS(tr(event.locationKey))}`,'END:VEVENT','END:VCALENDAR'];
-  try {
-    const blob = new Blob([`${lines.join('\r\n')}\r\n`], { type: 'text/calendar;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${id}-laraib-siddiqui-musharraf.ics`;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-  } catch { toast(tr('saveCalendarError')); }
 }
 
 async function shareInvitation() {
@@ -255,8 +229,6 @@ document.addEventListener('click', event => {
   if (dialogLanguage) { setLanguage(dialogLanguage.dataset.dialogLanguage); $('#language-dialog').close(); }
   const fix = event.target.closest('[data-fix]');
   if (fix) { invite = fix.dataset.fix; updateShareUrl(); renderEvents(); $('#invalid-dialog').close(); }
-  const calendar = event.target.closest('[data-calendar]');
-  if (calendar) addCalendar(calendar.dataset.calendar);
 });
 
 $('#guest-name').addEventListener('input', event => {
@@ -298,9 +270,47 @@ function preparePdfCard() {
   const second = sheet();
   ['.card-kicker', '.card-names', '.card-events', '.card-loved-ones', '.card-city', '.card-note'].forEach(selector => copy(second, selector));
   document.body.append(pdf);
+  return pdf;
 }
 window.addEventListener('beforeprint', preparePdfCard);
-$('#save-pdf').addEventListener('click', () => { preparePdfCard(); toast(tr('printHelp')); setTimeout(() => window.print(), 350); });
+$('#save-pdf').addEventListener('click', async event => {
+  const button = event.currentTarget;
+  button.disabled = true;
+  const pdfContent = preparePdfCard();
+  pdfContent.classList.add('pdf-rendering');
+  try {
+    const [{ default: html2canvas }, { jsPDF }] = await Promise.all([import('html2canvas'), import('jspdf')]);
+    await document.fonts.ready;
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a5', compress: true });
+    const pages = $$('.pdf-sheet', pdfContent);
+    for (let index = 0; index < pages.length; index++) {
+      const canvas = await html2canvas(pages[index], {
+        scale: 2, backgroundColor: '#fffaf1', useCORS: true, logging: false,
+        onclone: doc => {
+          const clone = doc.getElementById('pdf-invitation');
+          clone.style.position = 'absolute';
+          clone.style.left = '0';
+          clone.style.top = '0';
+          clone.style.zIndex = '1';
+          clone.querySelectorAll('.pdf-sheet').forEach((page, pageIndex) => {
+            if (pageIndex !== index) page.remove();
+          });
+        }
+      });
+      if (index) pdf.addPage();
+      const scale = Math.min(148 / canvas.width, 210 / canvas.height);
+      const width = canvas.width * scale;
+      pdf.addImage(canvas.toDataURL('image/jpeg', .94), 'JPEG', (148 - width) / 2, 0, width, canvas.height * scale);
+    }
+    pdf.save('Laraib-Musharraf-invitation.pdf');
+  } catch (error) {
+    console.error('Could not generate invitation PDF', error);
+    toast(tr('pdfDownloadError'));
+  } finally {
+    pdfContent.remove();
+    button.disabled = false;
+  }
+});
 $('#share-invitation').addEventListener('click', shareInvitation);
 $('#rsvp-form').addEventListener('change', event => {
   if (event.target.name !== 'attending') return;
