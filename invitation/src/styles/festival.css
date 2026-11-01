@@ -238,3 +238,27 @@ body::before { background:
 @media print {
   .landing-choices .screen-copy, .language-grid, .hero-continue, .event-timeline::before, .event-card .event-copy, .event-card .event-detail, .event-card .event-icon, .keepsake-details { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* Keep the card legible on narrow screens and prevent phone print clipping. */
+@media screen and (max-width: 760px) {
+  .keepsake-details .print-card { width: calc(100% - 20px); }
+  .print-card .card-inner { padding-inline: clamp(10px, 4vw, 20px); }
+  .print-card .card-names strong { font-size: clamp(27px, 8vw, 42px); overflow-wrap: anywhere; }
+  .print-card .card-event { grid-template-columns: minmax(0, 1fr); }
+  .print-card .card-event > * { min-width: 0; overflow-wrap: anywhere; }
+}
+@media print {
+  @page { size: A4 portrait; margin: 8mm; }
+  html, body { width: auto !important; height: auto !important; overflow: visible !important; }
+  main, .screen, .keepsake-screen { width: auto !important; height: auto !important; overflow: visible !important; }
+  .keepsake-details .print-card {
+    width: 100% !important; height: auto !important; min-height: 0 !important;
+    padding: 3mm !important; overflow: visible !important; margin: 0 !important;
+  }
+  .print-card .card-border, .print-card .card-inner { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+  .print-card .card-inner { padding: 5mm 7mm !important; gap: 2mm !important; justify-content: flex-start !important; }
+  .print-card .card-families { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 4mm; }
+  .print-card .card-event { grid-template-columns: minmax(0, 1fr) auto !important; }
+  .print-card .card-names strong { font-size: 30pt; overflow-wrap: anywhere; }
+  .print-card .card-to strong, .print-card .parent-line, .print-card .card-cousins strong { overflow-wrap: anywhere; }
+}
