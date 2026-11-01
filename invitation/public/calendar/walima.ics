@@ -6,9 +6,10 @@ BEGIN:VEVENT
 UID:walima-2026-laraib-musharraf@invitation
 DTSTAMP:20261101T000000Z
 DTSTART:20261228T133000Z
+DTEND:20261228T163000Z
 SUMMARY:Walima - Laraib Siddiqui & Musharraf Jahan
 LOCATION:Dawar Farms\, Greenfields Colony\, Faridabad
-DESCRIPTION:Starts at 7 pm. End time is not confirmed.\nhttps://maps.app.go
+DESCRIPTION:7 pm to 10 pm.\nhttps://maps.app.go
  o.gl/xHN6aEyZ7bYG4xWq7?g_st=ac
 END:VEVENT
 END:VCALENDAR

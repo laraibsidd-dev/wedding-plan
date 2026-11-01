@@ -6,9 +6,10 @@ BEGIN:VEVENT
 UID:haldi-mehendi-2026-laraib-musharraf@invitation
 DTSTAMP:20261101T000000Z
 DTSTART:20261226T133000Z
+DTEND:20261226T163000Z
 SUMMARY:Haldi & Mehendi - Laraib Siddiqui & Musharraf Jahan
 LOCATION:Tughlakabad Extension\, New Delhi
-DESCRIPTION:Starts at 7 pm. End time is not confirmed.\nhttps://maps.app.go
+DESCRIPTION:7 pm to 10 pm.\nhttps://maps.app.go
  o.gl/ZvgkCU1aGsDAmgTj9?g_st=ac
 END:VEVENT
 END:VCALENDAR

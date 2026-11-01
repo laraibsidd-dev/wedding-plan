@@ -117,8 +117,7 @@ function eventCard(id, index, print = false) {
       <span>${escape(place)}</span>
       ${mapLink}
       <span class="pending-pill">${escape(tr('time'))} · ${escape(tr('eventTime'))}</span>
-      <a class="calendar-button" href="${escape(googleCalendarUrl(event, tr(event.key), `${description}\n\n${tr('calendarTimeNote')}`, place))}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span> ${escape(tr('googleCalendar'))}<span aria-hidden="true">↗</span></a>
-      <small class="calendar-time-note">${escape(tr('calendarTimeNote'))}</small>
+      <a class="calendar-button" href="${escape(googleCalendarUrl(event, tr(event.key), description, place))}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">＋</span> ${escape(tr('googleCalendar'))}<span aria-hidden="true">↗</span></a>
       <a class="calendar-file" href="webcal://${escapeAttribute(location.host)}/calendar/${id}.ics">${escape(tr('appleCalendarSubscribe'))}</a>
       <small class="calendar-time-note">${escape(tr('appleCalendarHelp'))}</small>
       <a class="calendar-file" href="/calendar/${id}.ics" download>${escape(tr('calendarFile'))}</a><small class="calendar-time-note">${escape(tr('calendarFallbackHelp'))}</small>

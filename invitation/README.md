@@ -26,7 +26,7 @@ Guest names remain in memory for the current visit. The URL only contains the se
 
 ## Updating wedding details
 
-Edit the event records and locale strings together. Haldi + Mehendi is on 26 December, Nikah is on 27 December, and Walima is on 28 December; all events start at 7 pm. The combined Walima uses the Dawar Farms Google Maps pin. Keep RSVP collection limited to details needed for planning. Music is disabled. The user-provided audio is retained locally and omitted from deployment.
+Edit the event records and locale strings together. Haldi + Mehendi is on 26 December, Nikah is on 27 December, and Walima is on 28 December; all events run from 7 pm to 10 pm IST. The combined Walima uses the Dawar Farms Google Maps pin. Keep RSVP collection limited to details needed for planning. Music is disabled. The user-provided audio is retained locally and omitted from deployment.
 
 RSVP responses are stored in the `laraib-musharraf-rsvp` Neon project, in the Singapore region, using the `wedding_rsvps` table. The public API supports inserts only; review responses through the Neon console. The form tells guests their response is shared with the wedding hosts for planning.
 

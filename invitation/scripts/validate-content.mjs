@@ -35,6 +35,7 @@ for (const eventId of eventOrder) {
 }
 for (const eventId of eventOrder) {
   if (events[eventId]?.time !== '19:00') errors.push(`${eventId} must start at 19:00.`);
+  if (events[eventId]?.endTime !== '22:00') errors.push(`${eventId} must end at 22:00.`);
   for (const locale of expectedLocales) if (!messages[locale]?.eventTime?.trim()) errors.push(`${locale} is missing the event time copy.`);
 }
 if (inviteChoices.length !== eventOrder.length + 1 || inviteChoices[0] !== 'all') errors.push('Invite routes do not cover all events plus the all-events route.');

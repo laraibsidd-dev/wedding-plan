@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { googleCalendarUrl } from '../src/calendar.js';
 import { events, eventOrder } from '../src/data/events.js';
+import { readFileSync } from 'node:fs';
 
 for (const id of eventOrder) {
   const url = new URL(googleCalendarUrl(events[id], 'Title', 'Description', 'Place'));
@@ -13,6 +14,11 @@ for (const id of eventOrder) {
   assert.ok(end > start, `${id}: end after start`);
   // 7 pm IST is 13:30 UTC
   assert.equal(start.slice(9), '133000Z', `${id}: events start at 7 pm IST`);
+  assert.equal(end.slice(9), '163000Z', `${id}: events end at 10 pm IST`);
+  const ics = readFileSync(new URL(`../public/calendar/${id}.ics`, import.meta.url), 'utf8');
+  const day = events[id].day.replaceAll('-', '');
+  assert.ok(ics.includes(`DTSTART:${day}T133000Z\r\n`), `${id}: calendar file start`);
+  assert.ok(ics.includes(`DTEND:${day}T163000Z\r\n`), `${id}: calendar file end`);
   assert.ok(url.searchParams.get('text').includes('Laraib Siddiqui & Musharraf Jahan'), `${id}: title`);
 }
 console.log(`calendar links ok for ${eventOrder.length} events`);
