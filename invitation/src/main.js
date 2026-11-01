@@ -121,7 +121,7 @@ function eventCard(id, index, print = false) {
       <small class="calendar-time-note">${escape(tr('calendarTimeNote'))}</small>
       <a class="calendar-file" href="webcal://${escapeAttribute(location.host)}/calendar/${id}.ics">${escape(tr('appleCalendarSubscribe'))}</a>
       <small class="calendar-time-note">${escape(tr('appleCalendarHelp'))}</small>
-      <a class="calendar-file" href="/calendar/${id}.ics">${escape(tr('calendarFile'))}</a>
+      <details class="calendar-fallback"><summary>${escape(tr('calendarTrouble'))}</summary><p>${escape(tr('calendarFallbackHelp'))}</p><a class="calendar-file" href="/calendar/${id}.ics" download>${escape(tr('calendarFile'))}</a></details>
     </div>
   </article>`;
 }

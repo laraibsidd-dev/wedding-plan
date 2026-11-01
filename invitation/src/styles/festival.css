@@ -272,6 +272,9 @@ body::before { background:
 }
 #pdf-invitation.pdf-rendering { display: block; position: fixed; left: -10000px; top: 0; width: 148mm; z-index: -1; color: #173f37; font-family: var(--sans); }
 .calendar-time-note { display: block; color: #625650; font-size: 11px; line-height: 1.5; }
+.calendar-fallback { color: #534a45; font: 500 12px/1.5 var(--sans); }
+.calendar-fallback summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; text-decoration: underline; text-underline-offset: 3px; }
+.calendar-fallback p { margin: 0 0 4px; }
   .pdf-sheet {
     box-sizing: border-box; width: 148mm; min-height: 210mm; padding: 8mm;
     background: #fffaf1; break-after: page; page-break-after: always;
