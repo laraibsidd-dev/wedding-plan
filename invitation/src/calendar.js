@@ -15,3 +15,11 @@ export function googleCalendarUrl(event, title, description, location) {
   });
   return url.toString();
 }
+
+// Experimental browser-to-app handoff. Chrome may reject it if no browsable
+// calendar activity handles INSERT; in that case it opens the event file.
+export function androidCalendarIntent(event, title, description, location, fallbackUrl) {
+  const start = new Date(`${event.day}T${event.time}:00+05:30`).getTime();
+  const encode = value => encodeURIComponent(value);
+  return `intent://com.android.calendar/events#Intent;scheme=content;action=android.intent.action.INSERT;type=vnd.android.cursor.dir%2Fevent;l.beginTime=${start};l.endTime=${start + 3600000};S.title=${encode(`${title} — Laraib Siddiqui & Musharraf Jahan`)};S.description=${encode(description)};S.eventLocation=${encode(location)};S.browser_fallback_url=${encode(fallbackUrl)};end`;
+}
