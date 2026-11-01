@@ -270,7 +270,37 @@ $('#rsvp-name-slot').addEventListener('input', event => {
   $('#guest-name').value = guestName;
   renderGuest();
 });
-$('#save-pdf').addEventListener('click', () => { toast(tr('printHelp')); setTimeout(() => window.print(), 350); });
+// Build a separate, readable two-page card instead of shrinking the website into a PDF.
+function preparePdfCard() {
+  $('#pdf-invitation')?.remove();
+  const source = $('#print-card');
+  const pdf = document.createElement('div');
+  pdf.id = 'pdf-invitation';
+  pdf.setAttribute('aria-hidden', 'true');
+  const sheet = () => {
+    const page = document.createElement('section');
+    page.className = 'pdf-sheet';
+    const content = document.createElement('div');
+    content.className = 'pdf-sheet-inner';
+    page.append(content);
+    pdf.append(page);
+    return content;
+  };
+  const copy = (destination, selector) => {
+    const node = source.querySelector(selector)?.cloneNode(true);
+    if (!node) return;
+    node.removeAttribute('id');
+    node.querySelectorAll('[id]').forEach(child => child.removeAttribute('id'));
+    destination.append(node);
+  };
+  const first = sheet();
+  ['.bismillah', '.card-kicker', '.card-to', '.card-names', '.card-message', '.card-families'].forEach(selector => copy(first, selector));
+  const second = sheet();
+  ['.card-kicker', '.card-names', '.card-events', '.card-loved-ones', '.card-city', '.card-note'].forEach(selector => copy(second, selector));
+  document.body.append(pdf);
+}
+window.addEventListener('beforeprint', preparePdfCard);
+$('#save-pdf').addEventListener('click', () => { preparePdfCard(); toast(tr('printHelp')); setTimeout(() => window.print(), 350); });
 $('#share-invitation').addEventListener('click', shareInvitation);
 $('#rsvp-form').addEventListener('change', event => {
   if (event.target.name !== 'attending') return;

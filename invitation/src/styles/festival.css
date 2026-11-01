@@ -262,3 +262,48 @@ body::before { background:
   .print-card .card-names strong { font-size: 30pt; overflow-wrap: anywhere; }
   .print-card .card-to strong, .print-card .parent-line, .print-card .card-cousins strong { overflow-wrap: anywhere; }
 }
+
+/* A dedicated two-page PDF is easier to read on a phone than a dense poster. */
+#pdf-invitation { display: none; }
+@media print {
+  @page { size: A5 portrait; margin: 0; }
+  body > :not(#pdf-invitation) { display: none !important; }
+  #pdf-invitation { display: block !important; color: #173f37; font-family: var(--sans); }
+  .pdf-sheet {
+    box-sizing: border-box; width: 148mm; min-height: 210mm; padding: 8mm;
+    background: #fffaf1; break-after: page; page-break-after: always;
+    print-color-adjust: exact; -webkit-print-color-adjust: exact;
+  }
+  .pdf-sheet:last-child { break-after: auto; page-break-after: auto; }
+  .pdf-sheet-inner {
+    border: 1px solid #b17a49; padding: 9mm 8mm; min-height: 194mm;
+    display: flex; flex-direction: column; align-items: center; gap: 4mm; text-align: center;
+  }
+  .pdf-sheet .bismillah { display: grid; gap: 1mm; margin: 0; }
+  .pdf-sheet .bismillah > span { font-size: 23pt; line-height: 1.5; }
+  .pdf-sheet .bismillah > small { font-size: 8pt; line-height: 1.5; }
+  .pdf-sheet .card-kicker { color: #983951; font-size: 8pt; letter-spacing: .17em; }
+  .pdf-sheet .card-to { margin: 0; font-size: 9pt; line-height: 1.45; }
+  .pdf-sheet .card-to strong { display: block; font: 600 17pt/1.25 var(--serif); overflow-wrap: anywhere; }
+  .pdf-sheet .card-names { width: 100%; display: grid; gap: 1mm; margin: 0; }
+  .pdf-sheet .card-names strong { font: 600 26pt/1.05 var(--serif); overflow-wrap: anywhere; }
+  .pdf-sheet .card-names i { font: italic 17pt/1 var(--serif); color: #ad793a; }
+  .pdf-sheet .card-message { font-size: 9pt; line-height: 1.5; margin: 0; }
+  .pdf-sheet .card-families { display: grid; grid-template-columns: 1fr; width: 100%; gap: 3mm; margin: 0; }
+  .pdf-sheet .family-heading { color: #983951; font-size: 8pt; margin: 0 0 1mm; }
+  .pdf-sheet .parent-line { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 2mm; font-size: 8.5pt; line-height: 1.5; }
+  .pdf-sheet .parent-line strong, .pdf-sheet .parent-line .parent-relation { font: inherit; }
+  .pdf-sheet .parent-relation::before { margin-inline-end: 2mm; }
+  .pdf-sheet:nth-child(2) .card-names strong { font-size: 19pt; }
+  .pdf-sheet:nth-child(2) .card-names i { font-size: 13pt; }
+  .pdf-sheet .card-events { display: grid; width: 100%; gap: 2mm; margin: 0; padding: 0; }
+  .pdf-sheet .card-event { display: grid; grid-template-columns: 1fr; gap: 1mm; padding: 3mm 4mm; border: 1px solid #e1c9b4; border-radius: 2mm; background: #fff5ed; text-align: left; break-inside: avoid; }
+  .pdf-sheet .card-event span { font: 600 15pt/1.15 var(--serif); color: #183f36; }
+  .pdf-sheet .card-event strong { font: 600 10pt/1.3 var(--sans); text-align: left; margin: 0; }
+  .pdf-sheet .card-event small { font: 400 9pt/1.45 var(--sans); grid-column: auto; }
+  .pdf-sheet .card-loved-ones { width: 100%; padding: 3mm; background: #f9ece8; }
+  .pdf-sheet .card-loved-ones span { font-size: 8pt; }
+  .pdf-sheet .card-brother strong { font: 600 15pt/1.2 var(--serif); }
+  .pdf-sheet .card-cousins strong { font: 500 8.5pt/1.5 var(--sans); }
+  .pdf-sheet .card-city, .pdf-sheet .card-note { margin: 0; padding: 0; font-size: 8pt; }
+}
