@@ -198,3 +198,43 @@ body::before { background:
 @media print {
   .landing-stars i, .landing-seal, .hero-continue span:last-child, .family-group, .closing-flourish { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
+
+/* A more visible, continuous journey through the invitation. */
+@media (prefers-reduced-motion: no-preference) {
+  .landing-choices .screen-copy { animation: entrance-rise .85s cubic-bezier(.2,.7,.2,1) both; }
+  .language-grid { animation: entrance-rise .85s .12s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-continue { animation: entrance-rise .85s .24s cubic-bezier(.2,.7,.2,1) both; }
+  .event-card.reveal-pending:not(.is-visible) { opacity: .72; transform: translateY(30px); }
+  .scroll-reveal:not(.scroll-visible) { opacity: .72; transform: translateY(28px); }
+  .event-card.reveal-pending:focus-within, .scroll-reveal:focus-within { opacity: 1; transform: none; }
+  @supports (animation-timeline: view()) {
+    .event-timeline::before {
+      transform-origin: center top;
+      animation: timeline-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 45%;
+    }
+    .event-card .event-copy, .event-card .event-detail {
+      animation: content-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 75%;
+    }
+    .event-card .event-icon {
+      animation: icon-arrive linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 75%;
+    }
+    .keepsake-details {
+      animation: content-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 70%;
+    }
+  }
+}
+@keyframes entrance-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes timeline-grow { from { transform: scaleY(.08); } to { transform: scaleY(1); } }
+@keyframes content-rise { from { opacity: .65; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes icon-arrive { from { opacity: .55; transform: scale(.78) rotate(-12deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@media print {
+  .landing-choices .screen-copy, .language-grid, .hero-continue, .event-timeline::before, .event-card .event-copy, .event-card .event-detail, .event-card .event-icon, .keepsake-details { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
