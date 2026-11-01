@@ -162,3 +162,39 @@ body::before { background:
   .event-card, .scroll-reveal { opacity: 1 !important; transform: none !important; }
   .story-divider, .event-day span, .topbar::after { animation: none !important; }
 }
+
+/* Small flourishes follow the guest through the invitation without moving controls. */
+@media (prefers-reduced-motion: no-preference) {
+  .landing-stars i { animation: star-shimmer 4.5s ease-in-out infinite alternate; }
+  .landing-stars i:nth-child(even) { animation-delay: -2s; }
+  .landing-seal { animation: seal-arrive 1s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-continue span:last-child { animation: arrow-drift 2.4s ease-in-out infinite; }
+  .keepsake-details summary span:last-child { transition: transform .3s ease; }
+  .keepsake-details[open] summary span:last-child { transform: rotate(45deg); }
+  .rsvp-attendance label { transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease; }
+  .rsvp-attendance label:has(input:checked) { box-shadow: 0 4px 16px #a638611c; }
+  @media (hover: hover) {
+    .event-index a:hover { transform: translateY(-3px); }
+  }
+  @supports (animation-timeline: view()) {
+    .family-group {
+      animation: family-emerge linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+    .closing-flourish {
+      display: inline-block;
+      animation: closing-bloom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+  }
+}
+@keyframes star-shimmer { from { opacity: .35; } to { opacity: 1; } }
+@keyframes seal-arrive { from { opacity: 0; transform: scale(.9) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes arrow-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@keyframes family-emerge { from { opacity: .82; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes closing-bloom { from { opacity: .5; transform: scale(.8); } to { opacity: 1; transform: scale(1); } }
+@media print {
+  .landing-stars i, .landing-seal, .hero-continue span:last-child, .family-group, .closing-flourish { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
