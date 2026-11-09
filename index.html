@@ -319,6 +319,41 @@
     .tbl td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
     .tbl tr:last-child td { border-bottom: none; }
     .tbl tr:hover td { background: var(--rose-pale); }
+    .calendar-pickers { display: grid; gap: 12px; padding: 18px 16px 8px; }
+    .calendar-pickers label { display: grid; gap: 6px; color: var(--navy); font-size: .78rem; font-weight: 600; }
+    .calendar-pickers input { width: 100%; min-height: 42px; border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; font: inherit; color: var(--text); background: white; }
+    .calendar-pickers input:focus { outline: 3px solid rgba(201,132,106,.22); border-color: var(--rose); }
+    .calendar-event-row { display: grid; grid-template-columns: minmax(180px, 1.2fr) repeat(2, minmax(150px, .8fr)); gap: 12px; align-items: end; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: #fff; }
+    .calendar-event-name { align-self: center; color: var(--navy); font-weight: 600; }
+    .calendar-event-name small { display: block; margin-top: 3px; color: var(--muted); font-size: .74rem; font-weight: 400; }
+    .calendar-copy { min-height: 42px; border: 0; border-radius: 8px; padding: 9px 14px; background: var(--navy); color: white; font: inherit; font-weight: 600; cursor: pointer; }
+    .calendar-copy:hover { background: var(--navy2); }
+    .calendar-note { color: var(--muted); font-size: .76rem; line-height: 1.5; }
+    .calendar-status { min-height: 1.4em; color: var(--green); font-size: .82rem; }
+    @media (max-width: 700px) { .calendar-event-row { grid-template-columns: 1fr 1fr; } .calendar-event-name { grid-column: 1 / -1; } }
+    .task-summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .task-summary strong { color: var(--navy); }
+    .task-filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 22px; }
+    .task-filter { min-height: 40px; padding: 8px 14px; border: 1px solid var(--border); border-radius: 99px; background: white; color: var(--navy); font: inherit; cursor: pointer; }
+    .task-filter[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: white; }
+    .task-group { margin: 22px 0; }
+    .task-group h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0 0 10px; color: var(--navy); font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; }
+    .task-group h3 small { font: 500 .72rem 'DM Sans', sans-serif; color: var(--muted); }
+    .task-list { list-style: none; }
+    .task-row { display: grid; grid-template-columns: 24px minmax(0,1fr) auto auto; gap: 12px; align-items: center; padding: 13px 10px; border-bottom: 1px solid var(--border); }
+    .task-row:last-child { border-bottom: 0; }
+    .task-row[hidden], .task-group[hidden] { display: none; }
+    .task-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--green); cursor: pointer; }
+    .task-title { font-size: .88rem; line-height: 1.45; }
+    .task-row.is-done .task-title { color: var(--muted); text-decoration: line-through; }
+    .task-due { color: var(--muted); font-size: .74rem; white-space: nowrap; }
+    .task-remove { border: 0; padding: 6px 9px; border-radius: 7px; background: #fff0ed; color: #8b3d38; cursor: pointer; }
+    .task-add-form { display: grid; grid-template-columns: minmax(180px,1fr) minmax(150px,.6fr) minmax(180px,.7fr) auto; gap: 10px; align-items: end; padding: 16px; }
+    .task-add-form label { display: grid; gap: 6px; color: var(--navy); font-size: .78rem; font-weight: 600; }
+    .task-add-form input, .task-add-form select { width: 100%; min-height: 42px; border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px; background: white; color: var(--text); font: inherit; }
+    .task-add-form button { min-height: 42px; padding: 9px 14px; border: 0; border-radius: 8px; background: var(--navy); color: white; font: inherit; font-weight: 600; cursor: pointer; }
+    @media (max-width: 760px) { .task-add-form { grid-template-columns: 1fr 1fr; } .task-add-form label:first-child { grid-column: 1 / -1; } .task-add-form button { grid-column: 1 / -1; } }
+    @media (max-width: 520px) { .task-row { grid-template-columns: 24px minmax(0,1fr) auto; gap: 8px; } .task-due { grid-column: 2; grid-row: 2; } .task-remove { grid-column: 3; grid-row: 1 / span 2; } }
 
     /* ─── QUOTE ─── */
     .quote {
@@ -490,6 +525,10 @@
     <a class="active" onclick="go('dashboard')" data-page="dashboard">
       <span class="nav-icon">🏠</span> Dashboard
     </a>
+    <a onclick="go('tasks')" data-page="tasks">
+      <span class="nav-icon">📝</span> Task Tracker
+      <span class="nav-pct" id="np-task-tracker">0%</span>
+    </a>
     <div class="nav-divider">Functions</div>
     <a onclick="go('mangni')" data-page="mangni">
       <span class="nav-icon">💍</span> Mangni · Oct 3
@@ -629,20 +668,121 @@
   <div class="card">
     <div class="card-header">
       <div class="ch-icon">📅</div>
-      <h3>Function Timeline</h3>
+      <h3>Wedding Event Dates & Times</h3>
     </div>
-    <div class="tbl-wrap">
-      <table class="tbl">
-        <thead><tr><th>Function</th><th>Date</th><th>Timing</th></tr></thead>
-        <tbody>
-          <tr><td>💍 Mangni (Engagement)</td><td>3 October 2026</td><td>Evening</td></tr>
-          <tr><td>🌿 Mehndi</td><td>1–2 days before Nikah (~ Dec 24)</td><td>Afternoon / Evening</td></tr>
-          <tr><td>🕌 Nikah Ceremony</td><td>26 December 2026</td><td>Morning (Sunnah)</td></tr>
-          <tr><td>🍽️ Walima Reception</td><td>27 December 2026</td><td>Lunch</td></tr>
-          <tr><td>✈️ Honeymoon</td><td>Post Walima · TBD</td><td>—</td></tr>
-        </tbody>
-      </table>
+    <div class="calendar-pickers" id="wedding-event-pickers">
+      <div class="calendar-event-row" data-event-key="haldi-mehendi">
+        <div class="calendar-event-name">🌼 Haldi + Mehendi<small>At home</small></div>
+        <label>Date<input type="date" data-field="date" value="2026-12-26" /></label>
+        <label>Start time<input type="time" data-field="time" /></label>
+      </div>
+      <div class="calendar-event-row" data-event-key="nikah">
+        <div class="calendar-event-name">🕌 Nikah<small>Venue details to be confirmed</small></div>
+        <label>Date<input type="date" data-field="date" value="2026-12-27" /></label>
+        <label>Start time<input type="time" data-field="time" /></label>
+      </div>
+      <div class="calendar-event-row" data-event-key="walima">
+        <div class="calendar-event-name">🍽️ Walima<small>27 December</small></div>
+        <label>Date<input type="date" data-field="date" value="2026-12-27" /></label>
+        <label>Start time<input type="time" data-field="time" /></label>
+      </div>
+      <div class="calendar-event-row" data-event-key="reception">
+        <div class="calendar-event-name">✨ Reception<small>7 pm start already noted</small></div>
+        <label>Date<input type="date" data-field="date" value="2026-12-28" /></label>
+        <label>Start time<input type="time" data-field="time" value="19:00" /></label>
+      </div>
+      <button class="calendar-copy" type="button" id="calendar-copy-schedule">Copy schedule for Google Calendar</button>
+      <p class="calendar-note">Your picks save in this browser. When the times are final, copy the schedule and send it here; I can then create the Google Calendar events. To invite guests, we’ll also need their email addresses.</p>
     </div>
+    <p class="calendar-status" id="calendar-status" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ═══════════ TASK TRACKER ═══════════ -->
+<section class="page" id="page-tasks">
+  <div class="hero">
+    <div class="hero-eyebrow">Wedding planning · your next steps</div>
+    <h2>Task Tracker</h2>
+    <p>Keep the remaining wedding and honeymoon details in one simple checklist.</p>
+    <div class="hero-badge">📝 Progress saves on this device</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="ch-icon">✅</div><h3>Your progress</h3></div>
+    <div class="task-summary">
+      <p><strong id="task-progress-count">0 of 23 tasks complete</strong></p>
+      <span id="task-progress-label">0%</span>
+    </div>
+    <div class="cl-progress-bar" style="margin-top:12px;margin-bottom:0"><div class="cl-progress-fill" id="task-progress-fill"></div></div>
+  </div>
+
+  <div class="task-filters" role="group" aria-label="Filter wedding tasks">
+    <button class="task-filter" type="button" data-task-filter="all" aria-pressed="true">All tasks</button>
+    <button class="task-filter" type="button" data-task-filter="open" aria-pressed="false">To do</button>
+    <button class="task-filter" type="button" data-task-filter="done" aria-pressed="false">Completed</button>
+  </div>
+
+  <div class="card task-group" data-task-group="this-week">
+    <div class="card-header"><div class="ch-icon">🔔</div><h3>This week <small>Suggested target: 30 October</small></h3></div>
+    <ul class="task-list">
+      <li class="task-row" data-task-id="tt-schedule"><input type="checkbox" aria-label="Mark complete: Confirm event schedule, addresses and start times" /><span class="task-title">Confirm event schedule, addresses and start times, including whether the 27 Dec Walima and 28 Dec reception are separate events.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-invitation"><input type="checkbox" aria-label="Mark complete: Finish invitation card and website" /><span class="task-title">Finish the invitation card and website: names, parents’ names, event details, maps, languages and RSVP link.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-test-phone"><input type="checkbox" aria-label="Mark complete: Test invitation on a phone" /><span class="task-title">Test the invitation on a phone.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-test-maps-rsvp"><input type="checkbox" aria-label="Mark complete: Check map links and RSVP form" /><span class="task-title">Check every map link and test that the RSVP form works.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-send-invites"><input type="checkbox" aria-label="Mark complete: Send invitations and prepare WhatsApp message" /><span class="task-title">Send invitations once details are confirmed; prepare a short WhatsApp message with the link.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-honeymoon-choice"><input type="checkbox" aria-label="Mark complete: Choose honeymoon destination and dates" /><span class="task-title">Choose the honeymoon destination and travel dates.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-flights"><input type="checkbox" aria-label="Mark complete: Book honeymoon flights" /><span class="task-title">Book honeymoon flights after choosing the destination and dates.</span><span class="task-due">By 30 Oct</span></li>
+      <li class="task-row" data-task-id="tt-hotels"><input type="checkbox" aria-label="Mark complete: Book wedding and honeymoon hotels if needed" /><span class="task-title">Book wedding and honeymoon hotel stays if needed; check cancellation terms before paying.</span><span class="task-due">By 30 Oct</span></li>
+    </ul>
+  </div>
+
+  <div class="card task-group" data-task-group="mid-nov">
+    <div class="card-header"><div class="ch-icon">💌</div><h3>By mid-November <small>Suggested target: 15 November</small></h3></div>
+    <ul class="task-list">
+      <li class="task-row" data-task-id="tt-rsvp-list"><input type="checkbox" aria-label="Mark complete: Keep one RSVP list" /><span class="task-title">Keep one RSVP list with each guest’s name, party size, events attending, food needs and accessibility needs.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-rsvp-deadline"><input type="checkbox" aria-label="Mark complete: Set RSVP deadline and follow up" /><span class="task-title">Set an RSVP deadline and follow up with guests who haven’t replied.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-accommodation"><input type="checkbox" aria-label="Mark complete: Confirm guest accommodation needs" /><span class="task-title">Confirm guest accommodation needs and share hotel suggestions or booking details.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-photo"><input type="checkbox" aria-label="Mark complete: Confirm photographer and videographer" /><span class="task-title">Book or confirm the photographer and videographer.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-makeup"><input type="checkbox" aria-label="Mark complete: Confirm makeup and hair" /><span class="task-title">Book or confirm makeup and hair.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-outfits"><input type="checkbox" aria-label="Mark complete: Confirm outfits" /><span class="task-title">Finalize outfits and any remaining fittings.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-catering"><input type="checkbox" aria-label="Mark complete: Confirm catering" /><span class="task-title">Book or confirm catering.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-decor"><input type="checkbox" aria-label="Mark complete: Confirm decor" /><span class="task-title">Book or confirm décor.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-transport"><input type="checkbox" aria-label="Mark complete: Confirm transport" /><span class="task-title">Book or confirm transport.</span><span class="task-due">By 15 Nov</span></li>
+      <li class="task-row" data-task-id="tt-day-timeline"><input type="checkbox" aria-label="Mark complete: Decide event-day schedule" /><span class="task-title">Decide the event-day schedule: arrivals, family photos and who coordinates each event.</span><span class="task-due">By 15 Nov</span></li>
+    </ul>
+  </div>
+
+  <div class="card task-group" data-task-group="early-dec">
+    <div class="card-header"><div class="ch-icon">📌</div><h3>By early December <small>Suggested target: 7 December</small></h3></div>
+    <ul class="task-list">
+      <li class="task-row" data-task-id="tt-final-count"><input type="checkbox" aria-label="Mark complete: Give final guest counts" /><span class="task-title">Give final guest counts to the venues and caterers.</span><span class="task-due">By 7 Dec</span></li>
+      <li class="task-row" data-task-id="tt-vendor-final"><input type="checkbox" aria-label="Mark complete: Confirm vendor timings and balances" /><span class="task-title">Confirm vendor timings, balances due, contact numbers and backup plans.</span><span class="task-due">By 7 Dec</span></li>
+      <li class="task-row" data-task-id="tt-honeymoon-itinerary"><input type="checkbox" aria-label="Mark complete: Finalize honeymoon itinerary" /><span class="task-title">Finalize the honeymoon itinerary, hotel transfers and activities that need advance booking.</span><span class="task-due">By 7 Dec</span></li>
+      <li class="task-row" data-task-id="tt-share-schedule"><input type="checkbox" aria-label="Mark complete: Share event schedule and maps" /><span class="task-title">Share a clear event schedule and map links with guests.</span><span class="task-due">By 7 Dec</span></li>
+      <li class="task-row" data-task-id="tt-contact-list"><input type="checkbox" aria-label="Mark complete: Prepare day-of contact list" /><span class="task-title">Prepare a day-of contact list for guests and vendors.</span><span class="task-due">By 7 Dec</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="ch-icon">➕</div><h3>Add another task</h3></div>
+    <form class="task-add-form" id="task-add-form">
+      <label>Task
+        <input id="new-task-title" type="text" maxlength="140" placeholder="What else needs doing?" required />
+      </label>
+      <label>Due date
+        <input id="new-task-due" type="date" />
+      </label>
+      <label>Planning window
+        <select id="new-task-group">
+          <option value="this-week">This week</option>
+          <option value="mid-nov">By mid-November</option>
+          <option value="early-dec">By early December</option>
+        </select>
+      </label>
+      <button type="submit">Add task</button>
+    </form>
+    <p class="calendar-note" style="padding:0 16px 14px">Progress and any tasks you add are saved only in this browser on this device.</p>
+    <p class="calendar-status" id="task-tracker-status" role="status" aria-live="polite" style="padding:0 16px 12px"></p>
   </div>
 </section>
 
@@ -1971,6 +2111,205 @@
     if (count) count.textContent = guests.length;
   }
 
+  // ── Wedding event date/time choices (saved locally in this browser) ──
+  const EVENT_SCHEDULE_KEY = 'lm-wedding-event-schedule';
+  const eventPickerRoot = document.getElementById('wedding-event-pickers');
+
+  function loadEventSchedule() {
+    try {
+      const schedule = JSON.parse(localStorage.getItem(EVENT_SCHEDULE_KEY) || '{}');
+      return schedule && typeof schedule === 'object' ? schedule : {};
+    } catch {
+      return {};
+    }
+  }
+
+  function saveEventSchedule() {
+    const schedule = {};
+    eventPickerRoot.querySelectorAll('.calendar-event-row').forEach(row => {
+      schedule[row.dataset.eventKey] = {
+        date: row.querySelector('[data-field="date"]').value,
+        time: row.querySelector('[data-field="time"]').value,
+      };
+    });
+    localStorage.setItem(EVENT_SCHEDULE_KEY, JSON.stringify(schedule));
+  }
+
+  if (eventPickerRoot) {
+    const savedSchedule = loadEventSchedule();
+    eventPickerRoot.querySelectorAll('.calendar-event-row').forEach(row => {
+      const saved = savedSchedule[row.dataset.eventKey];
+      if (saved) {
+        const dateInput = row.querySelector('[data-field="date"]');
+        const timeInput = row.querySelector('[data-field="time"]');
+        dateInput.value = saved.date || dateInput.value;
+        timeInput.value = saved.time ?? timeInput.value;
+      }
+      row.querySelectorAll('input').forEach(input => input.addEventListener('change', () => {
+        saveEventSchedule();
+        document.getElementById('calendar-status').textContent = 'Schedule saved on this device.';
+      }));
+    });
+
+    document.getElementById('calendar-copy-schedule').addEventListener('click', async () => {
+      const lines = [...eventPickerRoot.querySelectorAll('.calendar-event-row')].map(row => {
+        const name = row.querySelector('.calendar-event-name').childNodes[0].textContent.trim();
+        const date = row.querySelector('[data-field="date"]').value;
+        const time = row.querySelector('[data-field="time"]').value;
+        const dateText = date ? new Date(`${date}T12:00:00`).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Date not set';
+        const timeText = time ? new Date(`1970-01-01T${time}:00`).toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' }) : 'Time to be decided';
+        return `${name}: ${dateText}, ${timeText}`;
+      });
+      try {
+        await navigator.clipboard.writeText(lines.join('\n'));
+        document.getElementById('calendar-status').textContent = 'Schedule copied. Paste it here when ready to create the Google Calendar events.';
+      } catch {
+        document.getElementById('calendar-status').textContent = 'Copy is unavailable here. Please send me the dates and times shown above.';
+      }
+    });
+  }
+
+  // ── Wedding task tracker ──
+  const TASK_TRACKER_KEY = 'lm-wedding-task-tracker-v1';
+  const taskTracker = document.getElementById('page-tasks');
+  let taskFilter = 'all';
+
+  function loadTaskTrackerState() {
+    try {
+      const state = JSON.parse(localStorage.getItem(TASK_TRACKER_KEY) || '{}');
+      return {
+        done: state?.done && typeof state.done === 'object' && !Array.isArray(state.done) ? state.done : {},
+        custom: Array.isArray(state?.custom) ? state.custom.filter(task => task && task.id && task.title && task.group) : [],
+      };
+    } catch {
+      return { done: {}, custom: [] };
+    }
+  }
+
+  let taskTrackerState = loadTaskTrackerState();
+
+  function saveTaskTrackerState() {
+    localStorage.setItem(TASK_TRACKER_KEY, JSON.stringify(taskTrackerState));
+  }
+
+  function taskDueLabel(date) {
+    if (!date) return 'No due date set';
+    const [year, month, day] = date.split('-').map(Number);
+    return `Due ${new Date(year, month - 1, day).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}`;
+  }
+
+  function renderTaskTracker() {
+    if (!taskTracker) return;
+
+    taskTracker.querySelectorAll('.task-row[data-task-id]').forEach(row => {
+      const checkbox = row.querySelector('input[type="checkbox"]');
+      const done = Boolean(taskTrackerState.done[row.dataset.taskId]);
+      checkbox.checked = done;
+      row.classList.toggle('is-done', done);
+    });
+
+    taskTracker.querySelectorAll('.custom-task').forEach(row => row.remove());
+    taskTrackerState.custom.forEach(task => {
+      const group = taskTracker.querySelector(`[data-task-group="${task.group}"] .task-list`);
+      if (!group) return;
+      const row = document.createElement('li');
+      row.className = 'task-row custom-task';
+      row.dataset.taskId = task.id;
+      if (taskTrackerState.done[task.id]) row.classList.add('is-done');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = Boolean(taskTrackerState.done[task.id]);
+      checkbox.setAttribute('aria-label', `Mark complete: ${task.title}`);
+      const title = document.createElement('span');
+      title.className = 'task-title';
+      title.textContent = task.title;
+      const due = document.createElement('span');
+      due.className = 'task-due';
+      due.textContent = taskDueLabel(task.due);
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'task-remove';
+      remove.textContent = 'Remove';
+      remove.setAttribute('aria-label', `Remove task: ${task.title}`);
+      row.append(checkbox, title, due, remove);
+      group.appendChild(row);
+    });
+
+    const rows = [...taskTracker.querySelectorAll('.task-row[data-task-id]')];
+    const complete = rows.filter(row => row.querySelector('input[type="checkbox"]').checked).length;
+    const percent = rows.length ? Math.round(complete / rows.length * 100) : 0;
+    document.getElementById('task-progress-count').textContent = `${complete} of ${rows.length} tasks complete`;
+    document.getElementById('task-progress-label').textContent = `${percent}%`;
+    document.getElementById('task-progress-fill').style.width = `${percent}%`;
+    document.getElementById('np-task-tracker').textContent = `${percent}%`;
+
+    taskTracker.querySelectorAll('[data-task-group]').forEach(group => {
+      const groupRows = [...group.querySelectorAll('.task-row[data-task-id]')];
+      groupRows.forEach(row => {
+        const isDone = row.querySelector('input[type="checkbox"]').checked;
+        row.hidden = taskFilter === 'open' ? isDone : taskFilter === 'done' ? !isDone : false;
+      });
+      group.hidden = groupRows.every(row => row.hidden);
+    });
+  }
+
+  if (taskTracker) {
+    taskTracker.querySelectorAll('.task-row[data-task-id]:not(.custom-task)').forEach(row => {
+      if (taskTrackerState.done[row.dataset.taskId]) row.classList.add('is-done');
+    });
+
+    taskTracker.addEventListener('change', event => {
+      const checkbox = event.target.closest('.task-row[data-task-id] input[type="checkbox"]');
+      if (!checkbox) return;
+      const row = checkbox.closest('.task-row[data-task-id]');
+      taskTrackerState.done[row.dataset.taskId] = checkbox.checked;
+      saveTaskTrackerState();
+      renderTaskTracker();
+      document.getElementById('task-tracker-status').textContent = checkbox.checked ? 'Task marked complete.' : 'Task reopened.';
+    });
+
+    taskTracker.addEventListener('click', event => {
+      const remove = event.target.closest('.task-remove');
+      if (!remove) return;
+      const row = remove.closest('.task-row[data-task-id]');
+      const id = row.dataset.taskId;
+      taskTrackerState.custom = taskTrackerState.custom.filter(task => task.id !== id);
+      delete taskTrackerState.done[id];
+      saveTaskTrackerState();
+      renderTaskTracker();
+      document.getElementById('task-tracker-status').textContent = 'Your task was removed.';
+    });
+
+    taskTracker.querySelectorAll('[data-task-filter]').forEach(button => button.addEventListener('click', () => {
+      taskFilter = button.dataset.taskFilter;
+      taskTracker.querySelectorAll('[data-task-filter]').forEach(option => option.setAttribute('aria-pressed', String(option === button)));
+      renderTaskTracker();
+    }));
+
+    document.getElementById('task-add-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const titleInput = document.getElementById('new-task-title');
+      const title = titleInput.value.trim();
+      if (!title) {
+        titleInput.focus();
+        return;
+      }
+      taskTrackerState.custom.push({
+        id: globalThis.crypto?.randomUUID?.() || `custom-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        title,
+        due: document.getElementById('new-task-due').value,
+        group: document.getElementById('new-task-group').value,
+      });
+      saveTaskTrackerState();
+      event.currentTarget.reset();
+      taskFilter = 'all';
+      taskTracker.querySelectorAll('[data-task-filter]').forEach(option => option.setAttribute('aria-pressed', String(option.dataset.taskFilter === 'all')));
+      renderTaskTracker();
+      document.getElementById('task-tracker-status').textContent = 'Task added.';
+      titleInput.focus();
+    });
+  }
+
   const guestAddBtn = document.getElementById('guest-add');
   if (guestAddBtn) {
     guestAddBtn.addEventListener('click', () => {
@@ -1986,6 +2325,7 @@
   updateCountdowns();
   setInterval(updateCountdowns, 60000);
   renderGuests();
+  renderTaskTracker();
 </script>
 <script src="lock.js"></script>
 </body>
